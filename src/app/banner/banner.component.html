@@ -1,5 +1,3 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
-<script src="script.js"></script>
 <div class="jumbotron banner-wrapper">
   <div class="col-12 col-sm-12 col-md-12 col-lg-11 col-xl-11 mx-auto">
     <h1 class="text-300">Make Budget and Luxury Online</h1>
@@ -12,24 +10,9 @@
         [formGroup]="form"
         class="row m-0 search-wrapper"
       >
-
-
-        <div class="wrapper" ng-app='autocompleteApp' ng-controller="mainController">
-          <autocomplete choices="items" enteredtext="text"
-            minlength="1" selected="selected"></autocomplete>
-          <pre>
-            Entered text: {{text}}
-            Minimum length: {{minlength}}
-            Selected: {{selected}}
-          </pre>
-        </div>
-
-
         <p class="col-12  col-sm-12 col-md-2 col-lg-2 col-xl-2 p-0 relative ">
           <label>Hotel / City</label>
           
-
-
           <input
             formControlName="city"
             type="text"

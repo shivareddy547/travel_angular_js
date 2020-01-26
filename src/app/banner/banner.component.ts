@@ -124,5 +124,6 @@ export class BannerComponent implements OnInit {
     console.log(this.data.outdate);
   }
 
+
   
 }
