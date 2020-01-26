@@ -1,0 +1,158 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
+<script src="script.js"></script>
+<div class="jumbotron banner-wrapper">
+  <div class="col-12 col-sm-12 col-md-12 col-lg-11 col-xl-11 mx-auto">
+    <h1 class="text-300">Make Budget and Luxury Online</h1>
+
+    <h1 class="text-400">Hotel Bookings with just a click.</h1>
+
+    <section>
+      <form
+        (ngSubmit)="search()"
+        [formGroup]="form"
+        class="row m-0 search-wrapper"
+      >
+
+
+        <div class="wrapper" ng-app='autocompleteApp' ng-controller="mainController">
+          <autocomplete choices="items" enteredtext="text"
+            minlength="1" selected="selected"></autocomplete>
+          <pre>
+            Entered text: {{text}}
+            Minimum length: {{minlength}}
+            Selected: {{selected}}
+          </pre>
+        </div>
+
+
+        <p class="col-12  col-sm-12 col-md-2 col-lg-2 col-xl-2 p-0 relative ">
+          <label>Hotel / City</label>
+          
+
+
+          <input
+            formControlName="city"
+            type="text"
+            class="form-control input-control input-first"
+            placeholder="e.g. Singapore"
+           
+            google-place
+          />
+          <!-- <input
+            formControlName="city"
+            type="text"
+            class="form-control input-control input-first"
+            placeholder="e.g. Singapore"
+            (onSelect)="onCity(val)"
+            google-place
+          />
+        -->
+        </p>
+
+        <p
+          class="col-12  col-sm-12 col-md-2 col-lg-2 col-xl-2 p-0 relative "
+          (click)="picker.open()"
+        >
+          <label>Check In</label>
+          <input
+            formControlName="check_in"
+            [matDatepicker]="picker"
+            placeholder="DD/MM/YYYY"
+            class="form-control input-control"
+            [min]="minDate"
+          />
+          <mat-datepicker #picker></mat-datepicker>
+        </p>
+        
+        <p
+          class="col-12  col-sm-12 col-md-2 col-lg-2 col-xl-2 p-0 relative "
+          (click)="picker2.open()"
+        >
+          <label>Check Out</label>
+          <input
+            formControlName="check_out"
+            [matDatepicker]="picker2"
+            placeholder="DD/MM/YYYY"
+            class="form-control input-control"
+            [min]="form.value['check_in']"
+          />
+          <mat-datepicker #picker2></mat-datepicker>
+        </p>
+        <p class="col-12  col-sm-12 col-md-2 col-lg-2 col-xl-2 p-0 relative">
+          <label>Guests</label>
+          <input
+            class="input-control w-100"
+            readonly
+            formControlName="no_of_adult"
+            matInput
+            placeholder="2 Adults 1 Child"
+            [matMenuTriggerFor]="appMenu"
+          />
+        </p>
+
+        <p class="col-12  col-sm-12 col-md-2 col-lg-2  col-xl-3 p-0 relative">
+          <input
+            type="submit"
+            class="btn  btn-search btn-warning"
+            value="Search"
+          />
+        </p>
+      </form>
+    </section>
+  </div>
+</div>
+<mat-menu #appMenu="matMenu" class="adults-child-selector" xPosition="before">
+  <div (click)="$event.stopPropagation()">
+    <div class="group-row">
+      <span>Adults</span>
+      <div class="d-flex align-items-center">
+        <button
+          mat-icon-button
+          [disabled]="no_of_adult < 1"
+          (click)="changeNoOfAdult($event, -1)"
+        >
+          <mat-icon>remove</mat-icon>
+        </button>
+        <div class="number">{{ no_of_adult }}</div>
+        <button mat-icon-button (click)="changeNoOfAdult($event, 1)">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="group-row">
+      <span>Children</span>
+      <div class="d-flex align-items-center">
+        <button
+          mat-icon-button
+          [disabled]="no_of_children < 1"
+          (click)="changeNoOfChildren($event, -1)"
+        >
+          <mat-icon>remove</mat-icon>
+        </button>
+        <div class="number">{{ no_of_children }}</div>
+        <button mat-icon-button (click)="changeNoOfChildren($event, 1)">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div *ngIf="no_of_children > 0">
+      <div class="group-row">
+        How old are the children you're traveling with?
+      </div>
+      <div class="group-row">
+        <div class="d-flex flex-wrap">
+          <select
+            *ngFor="let item of children"
+            [(ngModel)]="item"
+            class="age form-control form-control-sm  mr-2 mb-2"
+            (click)="$event.stopPropagation()"
+          >
+            <option *ngFor="let age of ages" [value]="age"
+              >{{ age }} years old</option
+            >
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-menu>

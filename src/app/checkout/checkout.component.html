@@ -1,0 +1,223 @@
+<div class="content-wrapper">
+  <div class="col-12 col-sm-12 col-md-11 col-lg-11 col-xl-11 mx-auto">
+    <div class="row mx-0 mb-3">
+      <div class="col-12 col-sm-12 col-md-7 col-lg-8 col-xl-8">
+        <section class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <p class="bg-grey p-4 rounded text-500 text-center">Marketing Banner</p>
+        </section>
+
+        <section class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <div class="card card-form">
+            <h5 class="card-header text-right fs-11 text-400">lorem bla bla in
+              <span class="text-time fs-14 pl-1 text-600">00:00:00</span>
+            </h5>
+
+            <div class="card-body">
+              <h6 class="col">Tell us about yourself</h6>
+              <mat-error *ngIf="errorMsg" class="p-3">{{errorMsg}}</mat-error>
+              <div *ngIf="successMsg" class="badge badge-success p-3 d-block">{{successMsg}}</div>
+
+              <form name="form" [formGroup]="form" (ngSubmit)="room_booking()" class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <section class="form-group">
+                  <label class="fs-14 mb-1 text-500">Full Name</label>
+                  <input type="text" formControlName="fullName" class="form-control form-control-sm" >
+                </section>
+
+                <section class="form-group">
+                  <label class="fs-14 mb-1 text-500">Email</label>
+                  <input type="email" formControlName="email" class="form-control form-control-sm">
+                </section>
+
+                <section class="form-group">
+                  <label class="fs-14 mb-1 text-500">Retype Email</label>
+                  <input type="email" formControlName="confirmEmail" class="form-control form-control-sm">
+                </section>
+
+                <div class="form-row">
+                  <section class="form-group col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                    <label class="fs-14 mb-1 text-500">Phone Number</label>
+                    <article class="row m-0">
+                      <p class="col-12 col-sm-2 col-md-2 col-lg-2 col-xl-2 p-0">
+                        <input type="text" formControlName="countryCode" class="form-control form-control-sm" placeholder="+91">
+                      </p>
+
+                      <p class="col-12 col-sm-10 col-md-10 col-lg-10 col-xl-10 p-0 pl-md-2">
+                        <input type="text" formControlName="phoneNo" class="form-control form-control-sm">
+                      </p>
+                    </article>
+                  </section>
+
+                  <section class="form-group col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 pl-0 pl-lg-3">
+                    <label class="fs-14 mb-1 text-500">Country / Region of residence</label>
+                    <select class="form-control form-control-sm fs-14" formControlName="country">
+                      <option>Choose</option>
+                    </select>
+                  </section>
+                </div>
+
+                <section class="form-group">
+                  <label class="fs-14 mb-3 text-500">Let us know your preference</label>
+
+                  <article class="form-group row m-0 fs-14">
+                    <p class="col-12 col-sm-12 col-md-6 col-lg-5 col-xl-4 pl-md-0">
+                      <label class="custom-radioButton m-0">
+                        <span class="rb-value">I'd like a large bed</span>
+                        <input type="radio" name="credInvolved">
+                        <span class="checkmark"></span>
+                      </label>
+                    </p>
+
+                    <p class="col-12 col-sm-12 col-md-6 col-lg-5 col-xl-4 pl-md-0">
+                      <label class="custom-radioButton m-0">
+                        <span class="rb-value">I'd like a twin bed</span>
+                        <input type="radio" name="credInvolved">
+                        <span class="checkmark"></span>
+                      </label>
+                    </p>
+                  </article>
+                </section>
+
+                <section class="form-group">
+                  <label class="fs-14 mb-1 text-500">Let us know when you are arriving</label>
+
+                  <article class="form-group row m-0">
+                    <p class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 p-0 mb-3 fs-13">
+                      We'll let teh property / host know when to expect you.
+                    </p>
+
+                    <p class="col-12 col-sm-12 col-md-5 col-lg-4 col-xl-3 mr-auto p-0 mb-2">
+                      <select class="form-control form-control-sm fs-14">
+                        <option>Choose</option>
+                      </select>
+                    </p>
+
+                    <p class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 p-0 m-0 text-muted fs-13">
+                      By proceeding with this booking, I agree to Wwalk's Terms of Use and Privacy Policy.
+                    </p>
+                  </article>
+                </section>
+
+                <section class="form-group m-0 text-right">
+                  <button class="btn btn-save w-25"> Proceed
+                    <h5 class="d-block text-400">Payment</h5>
+                  </button>
+                </section>
+              </form>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="col-12 col-sm-12 col-md-5 col-lg-4 col-xl-4 px-md-0" *ngIf="hotel">
+        <div
+          class="card flex-row flex-md-column flex-lg-row flex-xl-row flex-sm-row box-shadow detail-wrapper p-3 mb-4">
+          <img alt="" class="card-img-right flex-auto rounded-lg mb-2 pr-3" src="../../assets/images/image3.png" width="50%">
+
+          <div class="card-body pl-0 py-0">
+            <section class=" p-0">
+              <h6 class="mb-0"> {{hotel.name}} </h6>
+
+              <p class="mb-1 text-address">{{hotel.address}}</p>
+
+              <article class="mt-5">
+                <p class="rate-txt d-flex align-flex-end mb-0">
+                  <span class="rate rounded mr-1">{{hotel.ratings}}</span>
+                  <span>Awesome.</span><span class="m-0">{{hotel.reviews}} Reviews</span>
+                </p>
+              </article>
+            </section>
+          </div>
+        </div>
+
+        <section class="card col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 p-0 mb-3">
+          <article class="card-body px-0 pt-3 pb-0 bg-grey">
+            <span class="bg-red py-2 px-3 text-light fs-13 mt-2  rounded-right">
+              <i aria-hidden="true" class="fa fa-bomb"></i> Last minute deal!
+            </span>
+
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-4">
+              <section class="d-flex details">
+                <article class="left">
+                  <h6 class="m-0 fs-14">{{check_in}} - {{check_out}}</h6>
+
+                  <p class="fs-13 mt-2">1 x 2 Single Beds in Mixed Dormitory Room</p>
+
+                  <ul class="nav flex-column">
+                    <li>
+                      <label class="custom-checkbox mb-2">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        <span class="ratings ml-1">
+                          1 Room , 2 adults
+                        </span>
+                      </label>
+                    </li>
+
+                    <li>
+                      <label class="custom-checkbox mb-2">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        <span class="ratings ml-1">
+                          Max 2 adults
+                        </span>
+                      </label>
+                    </li>
+
+                    <li>
+                      <label class="custom-checkbox mb-2">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        <span class="ratings ml-1">
+                          Breakfast included
+                        </span>
+                      </label>
+                    </li>
+                  </ul>
+                </article>
+
+                <article class="right">
+                  <span class="fs-13">1 night</span>
+                  <span class="d-block fs-14">Change</span>
+                </article>
+              </section>
+            </div>
+
+            <hr class="mx-3">
+
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-3">
+              <section class="d-flex details">
+                <article class="left">
+                  <p class="fs-13 m-0">Original Price (1 room x 1 night)</p>
+                  <p class="fs-13 m-0">Price (1 room x 1 night)</p>
+                </article>
+
+                <article class="right text-right">
+                <p class="m-0 text-500 fs-14">INR {{hotel.actual_price}}</p>
+                  <h5 class="m-0">INR {{hotel.discount_price}}</h5>
+                </article>
+              </section>
+            </div>
+
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-3 bg-white py-3">
+              <section class="d-flex details">
+                <article class="left">
+                  <h6 class="text-400 m-0"> Price   
+                    <i class="fa fa-exclamation-circle fs-14"></i>
+                  </h6>
+                  <p class="fs-12 m-0">Inclusive of service charge 28%</p>
+                </article>
+
+                <article class="right text-right">
+                  <h5 class="m-0">INR0000</h5>
+                </article>
+              </section>
+
+              <h5 class="text-success text-400 mt-4">You saved INR 00000</h5>
+            </div>
+
+          </article>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+.card-form {
+    border: 1px solid #8a9e8d;
+
+    .card-header {
+        background: #e5f9e8;
+        border: 0;
+
+        .text-time {
+            color: #00c71f;
+            font-size: 17px;
+        }
+    }
+} 
+
+.details {
+    .left {
+        flex:  1 1 90%;
+        padding-right: 10px;
+    }
+
+    .right {
+         flex:  1 1 10%;
+     }
+}
